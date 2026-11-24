@@ -1,0 +1,1047 @@
+% A Readymade beamer presentation template
+% Version 1.1
+% Relase date: May 2, 2010
+% Released at http://www.stattler.com
+% by Rifat Jahan
+
+\documentclass{beamer}
+%\usecolortheme[named=green]{structure}
+\mode<presentation> {
+\usetheme{Warsaw} % My favorite!
+%\usetheme{Boadilla} % Pretty neat, soft color.
+%\usetheme{default}
+%\usetheme{Warsaw}
+%\usetheme{Bergen} % This template has nagivation on the left
+%\usetheme{Frankfurt} % Similar to the default with an extra region at the top.
+%\usecolortheme{seahorse} % Simple and clean template
+%\usetheme{Darmstadt} % not so good
+% Uncomment the following line if you want page numbers and using Warsaw theme
+% \setbeamertemplate{footline}[page number]
+%\setbeamercovered{transparent}
+\setbeamercovered{invisible}
+% To remove the navigation symbols from the bottom of slides%
+\setbeamertemplate{navigation symbols}{} 
+}
+
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{animate}
+\usepackage{caption} % to remove "Figure from caption
+\usepackage{fancyvrb}
+\usetikzlibrary{shapes,arrows}
+\usepackage{graphicx}
+\newcommand{\ac}{\`} % comando accento
+\newcommand{\code}[1]{\texttt{#1}} 
+\newcommand{\erpR}{\texttt{erpR }} 
+\newcommand{\oq}{``} 
+\newcommand{\cq}{''} 
+\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+
+\newcommand{\btVFill}{\vskip0pt plus 1filll}
+
+
+
+%\usepackage{Sweave} % sweave package
+
+%% ------------- SECTION FOR MULTICOLUMNS TOC ------------%% 
+% this code works only  if you also add \usepackage{multicol} above
+
+\makeatletter
+\def\insertsectionnavigation#1{%
+  \hbox to #1{\vbox{{\usebeamerfont{section in head/foot}%
+     \usebeamercolor[fg]{section in head/foot}%
+     \def\slideentry##1##2##3##4##5##6{}%
+     \def\sectionentry##1##2##3##4##5{%
+       \ifnum##5=\c@part%
+       \def\insertsectionhead{##2\hskip1em}%
+       \def\insertsectionheadnumber{##1}%
+       \def\insertpartheadnumber{##5}%
+         \hyperlink{Navigation##3}{%
+             \ifnum\c@section=##1%
+               {\usebeamertemplate{section in head/foot}}%
+             \else%
+               {\usebeamertemplate{section in head/foot shaded}}%
+             \fi%
+         }\par
+       \fi}%
+       \parbox[c][0.25cm][c]{.5\paperwidth}{%
+       \begin{multicols}{2}
+       \dohead
+       \end{multicols}}\space}
+     }%
+  \hfil}%
+}
+
+\def\insertsubsectionnavigation#1{%
+  \hbox to #1{%
+    \vbox{{%
+      \usebeamerfont{subsection in head/foot}\usebeamercolor[fg]{subsection in head/foot}%
+      \vskip0.5625ex%
+      \beamer@currentsubsection=0%
+      \def\sectionentry##1##2##3##4##5{}%
+      \def\slideentry##1##2##3##4##5##6{\ifnum##6=\c@part\ifnum##1=\c@section%
+        \ifnum##2>\beamer@currentsubsection%
+        \beamer@currentsubsection=##2%
+        \def\insertsubsectionhead{##5}%
+        \def\insertsectionheadnumber{##1}%
+        \def\insertsubsectionheadnumber{##2}%
+        \def\insertpartheadnumber{##6}%
+        \beamer@link(##4){%
+              \ifnum\c@subsection=##2%
+                {\usebeamertemplate{subsection in head/foot}}%
+              \else%
+                {\usebeamertemplate{subsection in head/foot shaded}}%
+              \fi\hfill}\par
+        \fi\fi\fi}%
+       \hspace*{0.5em}\parbox[c][0cm][c]{\dimexpr.5\paperwidth-1em\relax}{%
+       \begin{multicols}{2}
+       \dohead\vskip0.5625ex\end{multicols}
+       }\space
+   }\hfil
+}}}
+
+\setbeamertemplate{headline}
+{%
+  \leavevmode\@tempdimb=2.4375ex%
+  \ifnum\beamer@subsectionmax<\beamer@sectionmax%
+    \multiply\@tempdimb by\beamer@sectionmax%
+  \else%
+    \multiply\@tempdimb by\beamer@subsectionmax%
+  \fi%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.125ex%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=0.5\@tempdimb,dp=2ex]{section in head/foot}%
+      \vbox to0.5\@tempdimb{\vfill\insertsectionnavigation{.5\paperwidth}\vfill}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=0.5\@tempdimb,dp=2ex]{subsection in head/foot}%
+      \vbox to0.5\@tempdimb{\vfill\insertsubsectionnavigation{.5\paperwidth}\vfill}%
+    \end{beamercolorbox}%
+  \fi%
+}
+\makeatother
+
+%% ------------- END OF SECTION FOR MULTICOLUMNS TOC ------------%% 
+
+
+
+\captionsetup[figure]{labelformat=empty}% rede
+
+%\usepackage{bm} 
+% For typesetting bold math (not \mathbold)
+%\logo{\includegraphics[height=0.6cm]{yourlogo.eps}}
+%
+ 
+\title[Rediscovering the Overlooked]{Rediscovering the overlooked in neuropsychology: \\ 
+\vspace{0.2cm}
+\small{how better methods can enhance clinical practice}}
+%
+\vfill
+\author{\textbf{Giorgio Arcara}}
+\vfill
+\institute
+{
+IRCCS San Camillo Hospital, Venice, Italy\\
+University of Padua, Padua, Italy
+}
+\date{February 18, 2025}
+
+% \date \today \today will show current date. 
+% Alternatively, you can specify a date.
+
+
+
+\begin{document}
+
+%
+\begin{frame}
+\titlepage
+ \vspace*{0.5cm}
+%\begin{figure}
+\center{
+%\includegraphics[scale=0.1]{Figures/XPRAGit_logo.png}\\
+%\medskip
+\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{\includegraphics[scale=0.15]{Figures/CC_BY-NC-SA.png}}\hspace{0.4em}{\tiny CC BY-NC-SA 4.0}\\
+%\small{\url{https://creativecommons.org/licenses/by-nc-sa/3.0/}}
+}
+%end{figure}
+
+\section{Introduction}
+
+\end{frame}
+%
+%
+% INTRODUCTION
+
+\begin{frame}
+\frametitle{A Personal Story}
+\vfill
+\begin{center}
+\Large A personal story
+\end{center}
+%\pause
+\begin{figure}
+\fbox{\includegraphics[scale=0.25]{Figures/Tesi_Master.png}}
+\caption*{\small 2006}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A personal Story}
+\begin{columns}[c]
+        \column{0.5\textwidth}
+        \begin{figure}
+        \includegraphics[width=0.6\textwidth]{Figures/Semeiotica.jpg}
+        \caption*{\small 2016}
+        \end{figure}
+        \column{0.5\textwidth}
+        %\pause
+        \begin{figure}
+        \includegraphics[width=0.6\textwidth]{Figures/Methodology.jpeg}
+        \caption*{\small 2022}
+        \end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{The red thread}
+\begin{center}
+Can we improve the way we are doing clinical neuropsychology?
+%\pause
+\vfill
+Do we need to create something new? Or do we need to discover something ``forgotten''? \\ %\pause
+\vfill
+\emph{(a step back to reflect on what we are doing)}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A Personal Story}
+\vfill
+\begin{columns}
+        \column{0.5\textwidth}
+\begin{figure}
+\fbox{\includegraphics[scale=0.25]{Figures/Tesi_Master.png}}
+\caption*{\small 2006}
+\end{figure}
+        \column{0.5\textwidth}
+\begin{itemize}
+\item several missing pieces (no comprehensive manual on test development in neuropsychology).
+\item attention on some aspects but not on others.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Back to the basics}
+\begin{figure}
+\includegraphics[scale=0.1]{Figures/Bookworm.png}
+\end{figure}
+Several books on Psychometrics later...
+\vfill
+It seems we have forgotten (and started to overlook) some basic properties of tests that need to be considered.
+\end{frame}
+
+\begin{frame}
+\frametitle{Neuropsychological test in Italy}
+\begin{center}
+What is the current situation in Italy?
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Normative data}
+It appears that Italian neuropsychological literature on tests is focused on \textbf{normative data}.
+\vfill 
+\begin{itemize}
+\item Normative data are data collected on healthy participants to calculate thresholds to be used in clinical practice 
+\item papers on normative data typically collect data on large samples ($N > 300$) and reports \emph{thresholds} and sometimes \emph{corrections}, to be applied (e.g. age and education)
+\end{itemize}
+\vfill
+\begin{figure}
+\includegraphics[scale=0.6]{Figures/Thresholds.png}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{New tests in (Italian) Neuropsychology}
+A PUBMED query
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/NewTests.png}
+\end{figure}
+\texttt{\tiny{(((normative data[Title/Abstract]) OR ((norms[Title/Abstract]) OR ((normative values[Title/Abstract])))) AND (("2005/01/01"[Date - Publication] : "3000"[Date - Publication]))) 
+AND (Test) AND (Italian [Title/Abstract]) NOT (Corrigendum OR Erratum OR Retract*[Title])}}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The history of Italian methodology in neuropsychology}
+\begin{columns}
+        \column{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/SpinnlerTognoni.png}
+\caption*{\small 1987}
+\end{figure}
+        \column{0.5\textwidth}
+        \begin{figure}
+        \includegraphics[scale=0.2]{Figures/Bianchi.png}
+        \caption*{\small 2008}
+        \end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{The history of Italian methodology in neuropsychology}
+\begin{center}
+Kit of the Italian Neuropsychologist
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/Kit.png}
+\caption*{\small 2011}
+\end{figure}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\emph{A speculation}
+\vfill
+I think that (in Italy) this is an \textbf{unwanted} consequence of the Spinnler \& Tognoni compendium (1987), which reported only normative data.
+\vfill
+It seems that this somehow was interperted as suggesting that only normative data are necessary to use a test {including newly developed ones}.
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{A Systematic Review}
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/Psychometrics.png}
+\caption*{\href{https://link.springer.com/article/10.1007/s10072-021-05683-4}{\underline{Link}}}
+\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Some questions}
+\textbf{
+\begin{itemize}
+\item Are we certain that we are measuring (or assessing) what we intend to measure? %\pause
+%\item Are we using correctly our tests when we monitor change over time?
+\item Are age and education sufficient when assessing an individual? %\pause
+\item Are we confident that we are using the best available methods to determine clinical thresholds?
+\end{itemize}
+}
+\end{frame}
+
+
+
+
+
+\section{Validity}
+
+\begin{frame}
+\begin{center}
+{\Large{Are we certain that we are measuring (or assessing) what we intend to measure?}}
+\vfill %\pause
+\textbf{\Large Validity}
+\end{center}
+\end{frame}
+
+\begin{frame}
+Are we certain that our memory test is not heavily influenced by attention? Or executive functions?
+\vfill
+This has crucial implications on what we can conclude in clinical assessment. 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Forgotten Validity}
+A PUBMED query
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/NewTests_validity.png}
+\end{figure}
+\tiny{\texttt{(((normative data[Title/Abstract]) OR ((norms[Title/Abstract]) OR ((normative values[Title/Abstract])))) AND (("2005/01/01"[Date - Publication] : "3000"[Date - Publication]))) 
+AND (Test) AND (Italian [Title/Abstract])} \textbf{AND (Construct Validity)} \texttt{NOT (Corrigendum OR Erratum OR Retract*[Title])}}
+\end{frame}
+
+
+
+
+%%
+
+\begin{frame}
+\frametitle{Validity}
+\textbf{Validity} is the quality of a test to measure what it intends to measure.
+\vfill
+%\pause
+There are different ways to assess validity and different types of validity.
+\begin{itemize}
+\item construct validity
+\item face validity
+\item concurrent validity
+\item predictive validity
+\item ecological validity
+\item \ldots
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Forgotten Validity}
+In the review by Aiello et al. (2022) several tests used Concurrent Validity but not using \emph{Gold-Standards} with no thresholds for acceptable results.
+\vfill
+Almost \textbf{none} of the tests reported data on \textbf{Construct Validity*}.
+\vfill 
+\vfill
+\vfill
+*\footnotesize{sometimes it is not easy to understand whether some checks pertained construct validity}
+\end{frame}
+
+\begin{frame}
+\frametitle{Forgotten Validity}
+In the review by Aiello et al. (2022) several tests used Concurrent Validity but not using \emph{Gold-Standards} with no thresholds for acceptable results.
+\vfill
+Almost \textbf{none} of the tests reported data on \textbf{Construct Validity*}. \\
+\vfill
+\textbf{Are we really sure we are measuring what we aim to measure?}
+\vfill
+*\footnotesize{sometimes it is not easy to understand whether some checks pertained construct validity}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Construct Validity}
+How to assess construct validity? 
+\vfill
+In many ways, but mostly by inspecting if the test scores correlates (highly) with scores on test assessing the same construct.
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Rediscovered Validity}
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/GEMS.png}
+\end{figure}
+\begin{center}
+\href{https://onlinelibrary.wiley.com/doi/full/10.1002/brb3.2710}{\underline{Link}}
+\end{center}
+%
+\end{frame}
+
+
+\begin{frame}
+\frametitle{GEMS Construct Validity}
+\begin{itemize}
+\item \underline{Correlation with MoCA = 0.72}  {\small(as in other articles, useful, but not sufficient!)}
+\item \underline{Correlation with ENB-2 total score =  0.83} {\small(from a larger battery covering different aspects of cognition).}
+\end{itemize}
+%\pause
+\vfill
+Are we certain that ENB-2 total score is adequate? \\ (it is an arbitrary sum of scores)
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tele-GEMS}
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/TeleGEMS.png}
+\end{figure}
+\begin{center}
+\href{https://link.springer.com/article/10.1007/s10072-023-06862-1}{\underline{Link}}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{A more sophisticated approach}
+To develop a score on ``general cognitive ability'' on a group of patients in which validity was tested.
+\vfill
+\begin{itemize}
+\item we take available scores on cognition \\ (SDMT, Rey's 15 words, and CET) %\pause
+\item we perform a Principal Component Analysis (PCA) on the data. %\pause 
+\item we extract the first Component explaining higher \% of variance (in this case it was 60\%).
+\item we correlate Tele-GEMS with this bottom-up derived summary score.
+\end{itemize}
+%\pause
+\underline{Correlation with Summary Score = 0.5}  \small{(significant but maybe not satisfactory).}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interim Conclusion (1/3)}
+\vfill
+We can (and should) investigate if we are actually measuring what we intend to measure.
+\vfill
+%\pause
+In many cases we need to refine \emph{how} we can assess if the test is valid for its purpose (a job for methodologists).
+\end{frame}
+
+
+\section{Demographics}
+
+\begin{frame}
+\begin{center}
+\item Are age and education sufficient when assessing an individual?
+\vfill %\pause
+\textbf{\Large Demographic corrections}
+\end{center}
+\end{frame}
+
+%%%%
+
+\begin{frame}
+\frametitle{Test scores in clinical neuropsychology}
+In a working memory test a patient scores 5.
+\vfill
+%\pause
+In clinical neuropsychology, scores are almost always compared to \emph{thresholds} to facilitate interpretation.
+\vfill
+Typically, if the score is \emph{below} the threhsolds (i.e. \oq cut-offs \cq), it is intepreted as a probable impairment.
+%\begin{block}
+%\end{block}
+\end{frame}
+%
+
+%%%
+%\begin{frame}
+%\frametitle{Demographic variables and normative data}
+%Most methods for cognitive impairment are based on \emph{normative data}
+%\vfill
+%\begin{figure}
+%\includegraphics[scale=0.18]{R_code_psicostat/Figures/normative_data.png}
+%\end{figure}
+%Threshold typically delimits 5\% of worse performances (at sample or population level)
+%\end{frame}
+
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+Most methods for defining thresholds of cognitive impairment are based on \emph{normative data} that take into account age, education, and sex, using different methods.
+\vfill
+\begin{center}
+\LARGE{ Why?}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+Age, education, and Sex are used in normative data because they are easy-to-use variables that are known to influence cognitive performance.
+\vfill %\pause
+\begin{center}
+They tells us that, given those values in those variable, it is unlikely to observe that performance. \\
+Hence we infer a probable cognitive impairment.
+\end{center}
+\vfill %\pause
+In deriving our thresholds we may want to take into account these variables.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+ Demographic variables can be taken into acount by \textbf{dividing into bins}.
+\vfill
+\begin{figure}
+\includegraphics[scale=0.2]{R_code_psicostat/Figures/normative_data_strat.png}
+\end{figure}
+\end{frame}
+%
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+Or we can use \textbf{Regression Methods} that take into account the influence of age, education, and Sex.
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/GEMS_demo.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+Can we consider also other variables? Could they be relevant?
+\vfill %\pause
+This is an empirical question: if they helps us in estimating performance, than yes.
+\end{frame}
+
+\begin{frame}
+\frametitle{MoCA and Cognitive Reserve}
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/MOCA_CRIq.png}
+\end{figure}
+\begin{center}
+\href{https://link.springer.com/article/10.1007/s12144-022-03062-6}{\underline{Link}}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{MoCA and Cognitive Reserve}
+\textbf{Cognitive Reserve} is a consolidated concept in the field of aging and of cognitive performance.
+\vfill
+Several tools are available, as the \emph{Cognitive Reserve Index Questionnaire} (CRIq, Nucci et al., 2011)
+\end{frame}
+
+\begin{frame}
+\frametitle{MoCA and Cognitive Reserve}
+We tested several regression models, including or not CRIq, to check whether they were be useful to estimate performance.
+\vfill %\pause
+Models including CRIq as additional predictor yielded better results (measured with AIC).
+\end{frame}
+
+\begin{frame}
+\frametitle{MoCA and Cognitive Reserve}
+\begin{figure}
+\includegraphics[scale=0.42]{Figures/MOCA_effects.png}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{MoCA and Cognitive Reserve}
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/MOCA_Shiny.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ongoing results on Cognitive Reserve}
+What about other neuropsychological tests?
+%\pause
+\vfill
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/Biundo_ongoing.png}
+\caption{(SINP, December 2024)}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ongoing results on Cognitive Reserve}
+In the battery \textbf{17/20 tests (85\%)}, performances were predicted more accurately when an index of Cognitive Reserve was included (Life Experience Questionnaire).
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Interim Conclusion (2/3)}
+We should not forget why we are doing what we are doing (i.e., correcting for age and education).
+\vfill %\pause
+Maybe other variables can helps us in estimating cognitive performance, for more accurate clinical thresholds.
+\end{frame}
+
+
+%% 
+\section{Methods}
+\begin{frame}
+\begin{center}
+\item Are we confident that we are using the best available methods to determine clinical thresholds?
+\vfill %\pause
+\textbf{\Large Methods}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Methodology in Clinical Neuropsychology}
+Methodology in Clinical Neuropsychology should strive to improve the methods to yield more precise clinical data.
+\vfill
+%\pause
+In Italy (see also my slides) we rely on a method with excellent rigour (that of Equivalent Scores), but are we sure this metod cannot be improved?
+\end{frame}
+
+%
+
+
+\begin{frame}
+\frametitle{Improving Equivalent Scores}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/Improving.png}
+\end{figure}
+\href{https://link.springer.com/article/10.1007/s10072-024-07806-z}{\underline{Link}}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Demographic variables and normative data}
+Most methods for cognitive impairment are based on \emph{normative data} that take into account age, education, and sex, 
+\begin{figure}
+\includegraphics[scale=0.18]{R_code_psicostat/Figures/normative_data_cutoff.png}
+\end{figure}
+%\pause
+Threshold typically delimits 5\% of worse performances (at sample or population level)
+\end{frame}
+%
+
+
+\begin{frame}
+\frametitle{Equivalent Scores}
+\textbf{Equivalent Scores} is one of the most widespread method to calculate thresholds in clinical neuropsychology in Italy, originally developed by E. Capitani (Spinnler \& Tognoni, 1987).
+%\pause
+\vfill
+the method consists of:
+\begin{itemize}
+\item a first part using regression to calculate adjusted scores that consider age, education, and sex.
+\item a second part to derive thresholds for clinical inference (based on tolerance limits).
+\end{itemize}
+\end{frame}
+%
+
+%\begin{frame}
+%\frametitle{Equivalent Scores}
+%First calculate ES = 0.
+%\begin{figure}
+%\includegraphics[scale=0.6]{Figures/ES_1.png}
+%\end{figure}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{Equivalent Scores}
+%Then calculate all other ES.
+%\begin{figure}
+%\includegraphics[scale=0.5]{Figures/ES_2.png}
+%\end{figure}
+%\end{frame}
+%
+
+
+
+%\begin{frame}
+%\frametitle{Regression Method}
+%\begin{figure}
+%\includegraphics[scale=0.2]{R_code_psicostat/Figures/normative_data_example.png}
+%\end{figure}
+%This includes people of different Age (and Education, and Sex)
+%\end{frame}
+%
+
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/age_effect.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/age_effect_lm.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/age_effect_resid1.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/age_effect_residall.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/hist_resid.png}
+\end{figure}
+* \footnotesize{Intercept is added to go back to original scale}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Method}
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/hist_resid_cutoff.png}
+\end{figure}
+* \footnotesize{Value is further adjusted so it goes back to original scale}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Modeling: two issues}
+\begin{enumerate}
+\item what predictors should be included in the model? (Age, Education, Sex)
+\item what is the better transformation of predictors? (log, quadratic, inverse etc.)
+\begin{figure}
+\includegraphics[scale=0.25]{R_code_psicostat/Figures/transformations.png}
+\end{figure}
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Equivalent Scores - regression method \emph{(Capitani1987)}}
+Capitani 1987 (Spinnler \& Tognoni 1987).
+\begin{enumerate}
+\item fit separate simple regression models for \emph{Age} and \emph{Education} trying different transformations from a list (e.g. log, inverse, quadratic, etc.)
+\item fit a multiple regression with best transformations for Age and Education identified in 1. (best = higher $R^2$), and Sex.
+\item drop terms with $p > 0.05$, Bonferroni corrected (i.e., $p < 0.017$)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{An alternative method \emph{(Arcara2024)}}
+Arcara 2024 (\emph{in prep.})
+\begin{enumerate}
+\item fit all possible multiple regressions including \emph{Age}, \emph{Education} and \emph{Sex} with all possible transformations for \emph{Age} and \emph{Education} (from a list). Calculate \textbf{AIC} for all models.
+\item from each starting model in 1. , use a \emph{stepwise} backward selection (\code{step} function in \code{R}) to find the best model (lowest AIC) and select among all reduced models, select the model with the lowest AIC.
+\item drop iteratevely terms with $p > 0.05$, Bonferroni corrected (i.e., $p < 0.05/number\ of\ terms$)
+\end{enumerate}
+\end{frame}
+
+%\section{Method}
+
+
+\begin{frame}
+\frametitle{Comparison of methods}
+Methods can be compared by exploting the fact that ES make explicit assumption about generative model of observed data, \underline{\textbf{simulating normative data}}
+\vfill
+\begin{itemize}
+\item simulate normative data with known transformations and effects for Age, Education, and Sex
+\item  Calculate how classifications made with ES calculated with methods overlap with \emph{Ground Truth} ES, (ES = 0, or ES $>$ 0)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{An example of simulation}
+$19.5  -0.00031 \times Age^2   + 2.18 \times  log(Education)  + 0.258 \times Sex$
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/sim_effects.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{ES According to Ground Truth}
+\center{Normative Data}
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/dati_normativi_1.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{ES According to Ground Truth}
+\center{Normative Data}
+\begin{figure}
+\includegraphics[scale=0.3]{Figures/dati_normativi_2.png}
+\end{figure}
+%NOTE: nei dati normativi, ci si attende che  circa il 5\% delle performance (a livello di popolazione) saranno sotto cut-off.
+\end{frame}
+
+\begin{frame}
+\frametitle{Performance Classification}
+\begin{center}
+\begin{tabular} {|c|c|c|}
+ \hline
+&  \textbf{GT ES = 0 } & \textbf{GT ES $>$ 0} \\ 
+\hline
+ \textbf{Method ES = 0 } & True Positive (TP) & False Positive (FP) \\ 
+ \hline
+\textbf{Method ES $>$ 0} & False Negative (FN) &  True Negative (TN)\\ 
+ \hline
+\end{tabular}
+\end{center}
+\vfill
+%\pause
+From these data we can derive
+\begin{itemize}
+\item  \textbf{Sensitivity} 
+\item \textbf{Specificity}
+\item \ldots
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Testing the methods}
+%Methods can be compared by using the generative model assumed for ES and \underline{simulating normative data}.
+%\vfill
+%\begin{itemize}
+%\item simulate data with known transformations of Age and Education and calculate \emph{Ground Truth} (GT) cut-offs.
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Parameters (1): Normative data Sample Size}
+Normative Data Sample size\\
+  $\begin{bmatrix} 100 & 300 & 500 & 700 \end{bmatrix}$
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameters (2): True Adjusted Score variability}
+True Adjusted score Standard Deviation\\
+  $\begin{bmatrix} 0.5 & 1 & 1.5  \end{bmatrix}$
+  \begin{figure}
+ \includegraphics[scale=0.25]{R_code_psicostat/Figures/True_adj_score_SD.png}
+ \end{figure}
+\end{frame}
+
+
+%\begin{frame}
+%\frametitle{Parameters (3): Relationship between Age and Education}
+%\begin{itemize}
+%\item independent distributions
+%\item conditional distributions
+%%\pause
+%\begin{figure}
+%\includegraphics[scale=0.4]{Figures/Age_edu_values.png}
+%\end{figure}
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Simulation}
+1000 simulation for each condition of the three parameters.\\
+\vfill
+\begin{itemize}
+\item \emph{Normative data} (Train Set)
+\item \emph{New participants} (i.e. Test Set of 1000 new participants for each Normative Data sample)
+\end{itemize}
+%\pause
+\vfill
+For each simulation performance is tested in classifying correctly below/above cut-off considering GT classifications (Sensitivity, Specificity, and others)
+\vfill
+NOTE: as data are simulated with healthy participants, about 0.05 (at population level) are expected to fall below cut-off.
+\end{frame}
+
+%\section{Results}
+
+%\begin{frame}
+%\frametitle{Mean Squared Error - Normative Data}
+%\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TRAIN_MSE.jpeg}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Sensitivity - Normative Data}
+\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TRAIN_SENSITIVITY.jpeg}
+\end{frame}
+
+\begin{frame}
+\frametitle{Specificity - Normative Data}
+\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TRAIN_SPECIFICITY.jpeg}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Precision - Normative Data}
+%\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TRAIN_PRECISION.jpeg}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{F1 score - Normative Data}
+%\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TRAIN_F1.jpeg}
+%\end{frame}
+
+\begin{frame}
+\frametitle{Sensitivity -  New Participants}
+\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TEST_SENSITIVITY.jpeg}
+\end{frame}
+
+\begin{frame}
+\frametitle{Specificity - New Participants}
+\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TEST_SPECIFICITY.jpeg}
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Precision - New Participants}
+%\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TEST_PRECISION.jpeg}
+%\end{frame}
+%
+%\begin{frame}
+%\frametitle{F1 score - New Participants}
+%\includegraphics[scale=0.18]{Figures/Performance_Av3_Cv2_sample.demo.cond_TEST_F1.jpeg}
+%\end{frame}
+
+
+\begin{frame}
+\frametitle{Additional checks}
+(not shown, but trust me)
+\begin{itemize}
+\item better performance in guessing correctly the Ground Truth transformation.
+\item better performance with different conditional distributions of age and education.
+\item better performance with different proportion of participants below/above cut-off.
+\item the better method includes all three steps.
+\end{itemize}
+\end{frame}
+
+%\section{Discussion}
+
+\begin{frame}
+\frametitle{Discussion}
+\vfill
+A simulation approach can help in develop better methods for clinical neuropsychology.
+\vfill
+The new proposed method outperforms the existing method across a wide range of parameters and conditions
+\vfill
+The Equivalent Score method (as many other methods in Clinical Neuropsychology) can be improved.
+\end{frame} 
+
+
+\begin{frame}
+\frametitle{Future Directions}
+Many aspects left:
+\begin{itemize}
+\item what about reliability of scores? (with Andrea Spoto)
+\item what about heteroschedasticity and other realistic scenarios?
+\item rising awareness into issues and limitations of cut-offs.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\frametitle{Resources}
+\begin{itemize}
+\item All code and scripts are available at \url{https://github.com/giorgioarcara/Reg-Method-Norm-Data-Sim}.\\
+\item All supplementary materials available at \url{https://osf.io/yma69/}.
+%\item Manuscript soon on Psyarxiv.
+\item ShinyApp for easy application of the method {\small (with cautionary notes)}
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=0.1]{Figures/ShinyApp.png}
+\end{figure}
+\end{frame} 
+
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+\item We cannot take methods for granted, as they can always be improved to provide better tools for clinical practice. %\pause
+\item Methodology allows us to take a step back and view things from fresh (or even traditional) but useful perspectives. %\pause
+\item As researchers and clinicians, we should take the time to reflect: %\pause
+\end{itemize}
+
+\begin{center}
+\textbf{Are we truly conducting the best possible clinical assessment?}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+\center
+\Large{\textbf{Thanks!}}\\
+\vfill
+\normalsize{
+giorgio.arcara@gmail.com\\
+giorgio.arcara@hsancamillo.it\\
+\url{giorgioarcara.github.io}
+}
+
+\end{frame} 
+
+
+
+%\begin{frame}
+%\frametitle{Multiple Linear Regressions}
+%With \textbf{multiple} linear regression you can \emph{model} a response variable as a function of more than one predictor
+%\begin{equation}
+%Y =\beta_0 + \beta_1 X_1 + ... + \beta_n X_n + \epsilon
+%\end{equation}
+%\end{frame}
+
+
+
+
+% End of slides
+\end{document} 
